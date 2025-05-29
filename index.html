@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panzarini - Cafeteria & Lanchonete</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #800020;
+            --secondary-color: #f8f1e5;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary-color);
+        }
+        
+        .text-primary {
+            color: var(--primary-color);
+        }
+        
+        .border-primary {
+            border-color: var(--primary-color);
+        }
+        
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu-card {
+            transition: all 0.3s ease;
+        }
+        
+        .typing-text {
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40) 1s 1 normal both, blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .chat-container {
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .chat-container.open {
+            transform: translateY(0);
+        }
+        
+        .voice-recording {
+            animation: recording 1.5s infinite;
+        }
+        
+        @keyframes recording {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-primary text-2xl font-bold heading-font"> Cafeteria Panzarini</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#home" class="text-primary px-3 py-2 rounded-md text-sm font-medium hover:bg-primary hover:text-white transition">Home</a>
+                        <a href="#menu" class="text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-primary hover:text-white transition">Cardápio</a>
+                        <a href="#about" class="text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-primary hover:text-white transition">Sobre Nós</a>
+                        <a href="#contact" class="text-gray-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-primary hover:text-white transition">Contato</a>
+                        <button class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition">
+                            Faça seu pedido
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#menu" class="text-gray-700 block px-3 py-2 rounded-md text-base font-medium">Cardápio</a>
+                <a href="#about" class="text-gray-700 block px-3 py-2 rounded-md text-base font-medium">Sobre Nós</a>
+                <a href="#contact" class="text-gray-700 block px-3 py-2 rounded-md text-base font-medium">Contato</a>
+                <button class="bg-primary text-white block w-full px-3 py-2 rounded-md text-base font-medium mt-2">
+                    Faça seu pedido
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section id="home" class="hero-banner flex items-center justify-center text-center text-white">
+        <div class="px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 heading-font">Bem-vindo à Panzarini</h1>
+            <p class="text-xl md:text-2xl mb-8 typing-text">O melhor café da cidade, feito com amor e tradição.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#menu" class="bg-primary hover:bg-opacity-90 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                    Ver Cardápio
+                </a>
+                <a href="#contact" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                    Visite-nos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee of the Day -->
+    <section class="py-12 bg-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:flex-shrink-0 md:w-1/3">
+                        <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Café do Dia">
+                    </div>
+                    <div class="p-8 md:w-2/3">
+                        <div class="uppercase tracking-wide text-sm text-primary font-bold">Destaque do Dia</div>
+                        <h2 class="mt-2 text-3xl font-bold text-gray-900 heading-font">Café Especial Panzarini</h2>
+                        <p class="mt-3 text-gray-600">Um blend exclusivo de grãos arábica, torrados artesanalmente para trazer notas de chocolate amargo e frutas vermelhas. Perfeito para acompanhar nossos doces caseiros.</p>
+                        <div class="mt-6 flex items-center">
+                            <span class="text-2xl font-bold text-primary">R$ 9,90</span>
+                            <button class="ml-6 bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full transition duration-300">
+                                Pedir Agora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 heading-font">Nosso Cardápio</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <!-- Menu Filter -->
+            <div class="flex flex-wrap justify-center mb-8 gap-2">
+                <button class="filter-btn active px-4 py-2 rounded-full bg-primary text-white" data-category="all">Todos</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-category="coffee">Cafés</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-category="food">Lanches</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-category="dessert">Sobremesas</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-category="drink">Bebidas</button>
+            </div>
+            
+            <!-- Search -->
+            <div class="mb-8 max-w-md mx-auto">
+                <div class="relative">
+                    <input type="text" id="menu-search" placeholder="Buscar no cardápio..." class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <button class="absolute right-3 top-2 text-gray-500">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Menu Items -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-items">
+                <!-- Coffee Items -->
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Espresso" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Espresso</h3>
+                        <p class="text-gray-600 mt-2">Café concentrado, servido em pequena quantidade, com sabor intenso e aroma marcante.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 6,50</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Espresso" data-price="6.50">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
+                    <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Cappuccino" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Cappuccino</h3>
+                        <p class="text-gray-600 mt-2">Café espresso com leite vaporizado e uma generosa camada de espuma de leite.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 10,90</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Cappuccino" data-price="10.90">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Food Items -->
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
+                    <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=749&q=80" alt="Sanduíche Natural" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Sanduíche Natural</h3>
+                        <p class="text-gray-600 mt-2">Pão integral, frango desfiado, cream cheese, alface, tomate e cenoura ralada.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 14,50</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Sanduíche Natural" data-price="14.50">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
+                    <img src="https://images.unsplash.com/photo-1481070555726-e2fe83577250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" alt="Torta de Frango" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Torta de Frango</h3>
+                        <p class="text-gray-600 mt-2">Massa folhada crocante recheada com frango desfiado, catupiry e ervas finas.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 12,90</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Torta de Frango" data-price="12.90">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dessert Items -->
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
+                    <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Cheesecake" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Cheesecake de Frutas Vermelhas</h3>
+                        <p class="text-gray-600 mt-2">Base de biscoito, creme de queijo suave e cobertura de geleia de frutas vermelhas.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 15,90</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Cheesecake de Frutas Vermelhas" data-price="15.90">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80" alt="Brownie" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Brownie com Sorvete</h3>
+                        <p class="text-gray-600 mt-2">Brownie de chocolate quente acompanhado de sorvete de creme e calda de chocolate.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 13,50</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Brownie com Sorvete" data-price="13.50">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Drink Items -->
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
+                    <img src="https://images.unsplash.com/photo-1551029506-0807df4fa203?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Suco Natural" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Suco Natural</h3>
+                        <p class="text-gray-600 mt-2">Opções: Laranja, Abacaxi com Hortelã, Maracujá ou Morango.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 8,90</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Suco Natural" data-price="8.90">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
+                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Chocolate Quente" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Chocolate Quente</h3>
+                        <p class="text-gray-600 mt-2">Cremoso e feito com chocolate belga, servido com chantilly e canela.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">R$ 11,50</span>
+                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Chocolate Quente" data-price="11.50">
+                                Pedir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-16 bg-secondary parallax" style="background-image: url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-lg p-8 md:p-12">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 heading-font">Sobre Nós</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mt-4"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4 heading-font">Nossa História</h3>
+                        <p class="text-gray-700 mb-4">Fundada em 2010, a Panzarini nasceu do sonho de trazer para a cidade uma cafeteria que unisse qualidade, tradição e inovação. Começamos pequenos, com apenas uma mesa e um sonho grande.</p>
+                        <p class="text-gray-700 mb-4">Hoje, somos referência em café especial na região, com uma equipe apaixonada por proporcionar experiências memoráveis através de cada xícara servida.</p>
+                        <p class="text-gray-700">Nossos grãos são selecionados cuidadosamente de pequenos produtores, garantindo qualidade e sustentabilidade em toda nossa cadeia.</p>
+                        <p class="text-gray-700">Texto Criado por IA para você entender como fica</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4 heading-font">Nossa Filosofia</h3>
+                        <p class="text-gray-700 mb-4">Acreditamos que um bom café vai além da bebida - é sobre criar conexões, momentos de pausa e prazer no dia a dia.</p>
+                        <p class="text-gray-700 mb-4">Nosso compromisso é com:</p>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                            <li>Qualidade inigualável em nossos produtos</li>
+                            <li>Atendimento caloroso e personalizado</li>
+                            <li>Ambiente acolhedor e inspirador</li>
+                            <li>Práticas sustentáveis em todas as etapas</li>
+                            <li>Inovação constante em nosso cardápio</li>
+                            <p class="text-gray-700">Texto Criado por IA para você entender como fica</p>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+  <div class="bg-white p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-primary">12+</div>
+                        <div class="text-gray-700">Anos de experiência</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-primary">50+</div>
+                        <div class="text-gray-700">Itens no cardápio</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-primary">1000+</div>
+                        <div class="text-gray-700">Clientes satisfeitos</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-primary">24</div>
+                        <div class="text-gray-700">Fazendas parceiras</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 heading-font">Entre em Contato</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="bg-secondary rounded-xl p-6 h-full">
+                        <h3 class="text-2xl font-bold text-primary mb-6 heading-font">Informações</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-900">Endereço</h4>
+                                    <p class="text-gray-700">R. Maj. Vicente de Castro, Centro<br>Ipiranga/PR</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-900">Telefone</h4>
+                                    <p class="text-gray-700">(42) 9 9975-8547</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-envelope text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-900">Email</h4>
+                                    <p class="text-gray-700">cafeteria@panzarini.com.br</p>
+                                </div>
+                            </div>
+                                
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-clock text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-900">Horário de Funcionamento</h4>
+                                    <p class="text-gray-700">Segunda a Sexta: 7h às 20h<br>Sábado e Domingo: 8h às 18h</p>
+                                    <div class="mt-2">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                            <span class="w-2 h-2 mr-2 rounded-full bg-green-500"></span>
+                                            Aberto agora
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Nos siga nas redes sociais</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-primary text-white p-3 rounded-full hover:bg-opacity-90 transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-primary text-white p-3 rounded-full hover:bg-opacity-90 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-primary text-white p-3 rounded-full hover:bg-opacity-90 transition">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-secondary rounded-xl p-6 h-full">
+                        <h3 class="text-2xl font-bold text-primary mb-6 heading-font">Envie uma mensagem</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
+                                <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Telefone</label>
+                                <input type="tel" id="phone" name="phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700">Mensagem</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary"></textarea>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-3 px-4 rounded-md transition duration-300">
+                                    Enviar Mensagem
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 rounded-xl overflow-hidden shadow-lg">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d537.4224570784618!2d-50.58428129768889!3d-25.022772806117743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e85bcc986e2e23%3A0x467dcfe19b6dd62!2sCafeteria%20e%20Lanchonete%20Panzarini!5e0!3m2!1spt-BR!2sbr!4v1748462611808!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 heading-font">Panzarini</h3>
+                    <p class="text-white text-opacity-80">A melhor cafeteria da cidade, onde cada xícara conta uma história.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-white text-opacity-80 hover:text-opacity-100 transition">Home</a></li>
+                        <li><a href="#menu" class="text-white text-opacity-80 hover:text-opacity-100 transition">Cardápio</a></li>
+                        <li><a href="#about" class="text-white text-opacity-80 hover:text-opacity-100 transition">Sobre Nós</a></li>
+                        <li><a href="#contact" class="text-white text-opacity-80 hover:text-opacity-100 transition">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Horário</h4>
+                    <ul class="space-y-2 text-white text-opacity-80">
+                        <li>Segunda a Sexta: 7h às 20h</li>
+                        <li>Sábado e Domingo: 8h às 18h</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-white text-opacity-80 mb-4">Inscreva-se para receber nossas novidades e promoções.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Seu email" class="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-900">
+                        <button type="submit" class="bg-white text-primary px-4 py-2 rounded-r-md font-semibold hover:bg-opacity-90 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white border-opacity-20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white text-opacity-80 text-sm">© 2023 Panzarini. Todos os direitos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-white text-opacity-80 hover:text-opacity-100 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-white text-opacity-80 hover:text-opacity-100 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white text-opacity-80 hover:text-opacity-100 transition">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <button id="chat-button" class="fixed bottom-6 right-6 bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-opacity-90 transition z-50">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </button>
+
+    <!-- Floating Voice Button -->
+    <button id="voice-button" class="fixed bottom-24 right-6 bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-opacity-90 transition z-50">
+        <i class="fas fa-microphone text-2xl"></i>
+    </button>
+
+    <!-- Chat Container -->
+    <div id="chat-container" class="fixed bottom-20 right-6 w-80 bg-white rounded-t-xl shadow-xl z-40 hidden chat-container">
+        <div class="bg-primary text-white px-4 py-3 rounded-t-xl flex justify-between items-center">
+            <h3 class="font-bold">Atendimento Panzarini</h3>
+            <button id="close-chat" class="text-white hover:text-opacity-80">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-4 h-64 overflow-y-auto bg-gray-50" id="chat-messages">
+            <div class="mb-4">
+                <div class="bg-primary bg-opacity-10 text-gray-800 rounded-lg p-3 max-w-xs">
+                    Olá! Como posso te ajudar hoje?
+                </div>
+                <div class="text-xs text-gray-500 mt-1">Panzarini • Agora</div>
+            </div>
+        </div>
+        <div class="p-3 border-t border-gray-200">
+            <div class="flex">
+                <input type="text" id="chat-input" placeholder="Digite sua mensagem..." class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary">
+                <button id="send-chat" class="bg-primary text-white px-4 py-2 rounded-r-md hover:bg-opacity-90 transition">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Modal -->
+    <div id="voice-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-primary">Pedido por Voz</h3>
+                <button id="close-voice" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="text-center mb-6">
+                <div id="voice-icon" class="mx-auto bg-primary bg-opacity-10 w-20 h-20 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-microphone text-3xl text-primary"></i>
+                </div>
+                <p id="voice-status" class="text-gray-700">Clique no microfone para começar a falar</p>
+                <div id="voice-transcript" class="mt-4 p-3 bg-gray-100 rounded-lg min-h-16 hidden"></div>
+            </div>
+            
+            <div class="flex justify-center gap-4">
+                <button id="start-voice" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition">
+                    <i class="fas fa-microphone mr-2"></i> Falar
+                </button>
+                <button id="send-voice" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-full hover:bg-gray-300 transition hidden">
+                    <i class="fab fa-whatsapp mr-2"></i> Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-primary">Fazer Pedido</h3>
+                <button id="close-order" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-4">
+                <p id="order-item" class="text-lg font-semibold"></p>
+                <p id="order-price" class="text-primary font-bold"></p>
+            </div>
+            
+            <div class="mb-4">
+                <label for="order-notes" class="block text-sm font-medium text-gray-700 mb-1">Observações</label>
+                <textarea id="order-notes" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary" rows="3" placeholder="Ex: Sem açúcar, com pouco sal..."></textarea>
+            </div>
+            
+            <button id="confirm-order" class="w-full bg-primary text-white py-3 rounded-md hover:bg-opacity-90 transition font-bold">
+                Pedir via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Menu Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const menuItems = document.querySelectorAll('.menu-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active', 'bg-primary', 'text-white'));
+                filterButtons.forEach(btn => btn.classList.add('border', 'border-primary', 'text-primary'));
+                
+                // Add active class to clicked button
+                button.classList.add('active', 'bg-primary', 'text-white');
+                button.classList.remove('border', 'border-primary', 'text-primary');
+                
+                const category = button.getAttribute('data-category');
+                
+                menuItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Menu Search
+        const menuSearch = document.getElementById('menu-search');
+        
+        menuSearch.addEventListener('input', () => {
+            const searchTerm = menuSearch.value.toLowerCase();
+            
+            menuItems.forEach(item => {
+                const itemName = item.querySelector('h3').textContent.toLowerCase();
+                const itemDesc = item.querySelector('p').textContent.toLowerCase();
+                
+                if (itemName.includes(searchTerm) || itemDesc.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Chat Toggle
+        const chatButton = document.getElementById('chat-button');
+        const chatContainer = document.getElementById('chat-container');
+        const closeChat = document.getElementById('close-chat');
+        
+        chatButton.addEventListener('click', () => {
+            chatContainer.classList.toggle('hidden');
+            chatContainer.classList.toggle('open');
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatContainer.classList.add('hidden');
+            chatContainer.classList.remove('open');
+        });
+        
+        // Chat Functionality
+        const chatInput = document.getElementById('chat-input');
+        const sendChat = document.getElementById('send-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        
+        sendChat.addEventListener('click', () => {
+            if (chatInput.value.trim() !== '') {
+                // User message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'mb-4 flex justify-end';
+                userMessage.innerHTML = `
+                    <div>
+                        <div class="bg-primary text-white rounded-lg p-3 max-w-xs ml-auto">
+                            ${chatInput.value}
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1 text-right">Você • Agora</div>
+                    </div>
+                `;
+                chatMessages.appendChild(userMessage);
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Bot response after delay
+                setTimeout(() => {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'mb-4';
+                    botMessage.innerHTML = `
+                        <div>
+                            <div class="bg-primary bg-opacity-10 text-gray-800 rounded-lg p-3 max-w-xs">
+                                Entendido! Para finalizar seu pedido, por favor nos informe seu nome e endereço.
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">Panzarini • Agora</div>
+                        </div>
+                    `;
+                    chatMessages.appendChild(botMessage);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+                
+                // Clear input
+                chatInput.value = '';
+            }
+        });
+        
+        // Voice Order
+        const voiceButton = document.getElementById('voice-button');
+        const voiceModal = document.getElementById('voice-modal');
+        const closeVoice = document.getElementById('close-voice');
+        const startVoice = document.getElementById('start-voice');
+        const sendVoice = document.getElementById('send-voice');
+        const voiceStatus = document.getElementById('voice-status');
+        const voiceTranscript = document.getElementById('voice-transcript');
+        const voiceIcon = document.getElementById('voice-icon');
+        
+        let recognition;
+        let transcript = '';
+        
+        voiceButton.addEventListener('click', () => {
+            voiceModal.classList.remove('hidden');
+        });
+        
+        closeVoice.addEventListener('click', () => {
+            voiceModal.classList.add('hidden');
+            stopRecognition();
+        });
+        
+        startVoice.addEventListener('click', () => {
+            if (!recognition) {
+                startRecognition();
+            } else {
+                stopRecognition();
+            }
+        });
+        
+        function startRecognition() {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'pt-BR';
+            recognition.interimResults = true;
+            
+            recognition.onstart = () => {
+                voiceStatus.textContent = 'Ouvindo...';
+                voiceIcon.classList.add('voice-recording');
+                startVoice.innerHTML = '<i class="fas fa-stop mr-2"></i> Parar';
+                voiceTranscript.classList.remove('hidden');
+                transcript = '';
+            };
+            
+            recognition.onresult = (event) => {
+                transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) {
+                        transcript += event.results[i][0].transcript;
+                    } else {
+                        transcript += event.results[i][0].transcript;
+                    }
+                }
+                voiceTranscript.textContent = transcript;
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('Erro no reconhecimento de voz:', event.error);
+                voiceStatus.textContent = 'Erro: ' + event.error;
+                stopRecognition();
+            };
+            
+            recognition.onend = () => {
+                if (transcript.trim() !== '') {
+                    voiceStatus.textContent = 'Pronto! Revise seu pedido abaixo.';
+                    sendVoice.classList.remove('hidden');
+                } else {
+                    voiceStatus.textContent = 'Não entendi. Clique para tentar novamente.';
+                }
+                voiceIcon.classList.remove('voice-recording');
+                startVoice.innerHTML = '<i class="fas fa-microphone mr-2"></i> Falar';
+            };
+            
+            recognition.start();
+        }
+        
+        function stopRecognition() {
+            if (recognition) {
+                recognition.stop();
+                recognition = null;
+            }
+        }
+        
+        sendVoice.addEventListener('click', () => {
+            if (transcript.trim() !== '') {
+                const whatsappUrl = `https://wa.me/5542999574674?text=${encodeURIComponent('Olá Panzarini, gostaria de pedir: ' + transcript)}`;
+                window.open(whatsappUrl, '_blank');
+                voiceModal.classList.add('hidden');
+            }
+        });
+        
+        // Order Modal
+        const orderButtons = document.querySelectorAll('.order-btn');
+        const orderModal = document.getElementById('order-modal');
+        const closeOrder = document.getElementById('close-order');
+        const orderItem = document.getElementById('order-item');
+        const orderPrice = document.getElementById('order-price');
+        const confirmOrder = document.getElementById('confirm-order');
+        
+        orderButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.getAttribute('data-item');
+                const price = button.getAttribute('data-price');
+                
+                orderItem.textContent = item;
+                orderPrice.textContent = `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}`;
+                orderModal.classList.remove('hidden');
+                
+                // Update WhatsApp link
+                confirmOrder.addEventListener('click', () => {
+                    const notes = document.getElementById('order-notes').value;
+                    const message = `Olá Panzarini, gostaria de pedir:\n*${item} - R$ ${parseFloat(price).toFixed(2).replace('.', ',')}*\nObservações: ${notes || 'Nenhuma'}`;
+                    const whatsappUrl = `https://wa.me/5542999574674?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+            });
+        });
+        
+        closeOrder.addEventListener('click', () => {
+            orderModal.classList.add('hidden');
+        });
+        
+        // Contact Form
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would normally send the form data to a server
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            contactForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Check if establishment is open
+        function checkOpenStatus() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+            const hour = now.getHours();
+            
+            const isWeekday = day >= 1 && day <= 5; // Monday to Friday
+            const isWeekend = day === 0 || day === 6; // Saturday or Sunday
+            
+            let isOpen = false;
+            
+            if (isWeekday && hour >= 7 && hour < 20) {
+                isOpen = true;
+            } else if (isWeekend && hour >= 8 && hour < 18) {
+                isOpen = true;
+            }
+            
+            return isOpen;
+        }
+        
+        // Update open status indicator
+        const openStatusElement = document.querySelector('.open-status');
+        if (openStatusElement) {
+            if (checkOpenStatus()) {
+                openStatusElement.textContent = 'Aberto agora';
+                openStatusElement.classList.add('text-green-500');
+            } else {
+                openStatusElement.textContent = 'Fechado agora';
+                openStatusElement.classList.add('text-red-500');
+            }
+        }
+    </script>
+</body>
+</html>
