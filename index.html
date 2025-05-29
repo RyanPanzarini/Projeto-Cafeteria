@@ -11,12 +11,12 @@
         
         :root {
             --primary-color: #800020;
-            --secondary-color: #f8f1e5;
+            --secondary-color: #e5e9f8;
         }
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f8f8;
+            background-color: #e2e2e2;
             color: #333;
         }
         
@@ -38,6 +38,7 @@
         
         .hero-banner {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+             background-size: contain;
             background-size: cover;
             background-position: center;
             height: 80vh;
@@ -56,8 +57,11 @@
             border-right: 2px solid var(--primary-color);
             white-space: nowrap;
             overflow: hidden;
-            animation: typing 3s steps(40) 1s 1 normal both, blink-caret 0.75s step-end infinite;
+            width: 0;
+            animation: typing 3s steps(40) 1s forwards, blink-caret 0.75s step-end infinite;
         }
+
+    
         
         @keyframes typing {
             from { width: 0 }
@@ -111,8 +115,9 @@
     <nav class="bg-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-primary text-2xl font-bold heading-font"> Cafeteria Panzarini</span>
+                <div class="flex-shrink-0 flex items-center space-x-4">
+                    <img class="w-16 h-16 rounded-full ml-2" src="Imagens/1.png" alt="Café do Dia">
+                    <span class="text-primary text-2xl font-bold heading-font space-x-4"> Cafeteria Panzarini</span>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
@@ -151,7 +156,7 @@
     <section id="home" class="hero-banner flex items-center justify-center text-center text-white">
         <div class="px-4 sm:px-6 lg:px-8 max-w-4xl">
             <h1 class="text-4xl md:text-6xl font-bold mb-6 heading-font">Bem-vindo à Panzarini</h1>
-            <p class="text-xl md:text-2xl mb-8 typing-text">O melhor café da cidade, feito com amor e tradição.</p>
+            <p class="text-xl md:text-2xl mb-8 typing-text">O melhor café da Ipiranga/PR, feito com amor e tradição.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="#menu" class="bg-primary hover:bg-opacity-90 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
                     Ver Cardápio
@@ -159,6 +164,15 @@
                 <a href="#contact" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
                     Visite-nos
                 </a>
+            </div>
+             <div class="px-5 sm:px-6 lg:px-8 max-w-4xl gap-8 mt-8 space-x-5">
+                    <a href="https://www.instagram.com/cafeteriapanzarini/" target="_blank" class="social-icon hover:text-white transition">
+                        <i class="fab fa-instagram text-3xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ryan-panzarini-137521265/" target="_blank" class="social-icon hover:text-white transition">
+                        <i class="fab fa-whatsapp text-3xl"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -230,14 +244,70 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
-                    <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Cappuccino" class="w-full h-48 object-cover">
+    <img src="Imagens/Cappuccino-1.webp" alt="Cappuccino" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Cappuccino</h3>
+        <p class="text-gray-600 mt-2">Café espresso com leite vaporizado e uma generosa camada de espuma de leite.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 10,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Cappuccino" data-price="10.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
+    <img src="Imagens/Destaque-Latte-Macchiato.webp" alt="Macchiato" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Macchiato</h3>
+        <p class="text-gray-600 mt-2">Espresso com um toque de leite vaporizado, criando um sabor equilibrado e suave.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 8,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Macchiato" data-price="8.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
+    <img src="Imagens/the_perfect_mocha_coffee_29100_16x9.jpg.webp" alt="Mocha" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Mocha</h3>
+        <p class="text-gray-600 mt-2">Mistura de espresso, chocolate e leite vaporizado, finalizado com chantilly.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 12,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Mocha" data-price="12.50">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
+    <img src="Imagens/Flat_white_sitting_on_a_table.webp" alt="Flat White" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Flat White</h3>
+        <p class="text-gray-600 mt-2">Café espresso coberto com leite vaporizado sedoso, sem espuma excessiva.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 11,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Flat White" data-price="11.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+      
+            <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="coffee">
+                    <img src="Imagens/fotos-maria-11.png.webp" alt="Cappuccino" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900">Cappuccino</h3>
+                        <h3 class="text-xl font-bold text-gray-900">Cappuccino Cremoso</h3>
                         <p class="text-gray-600 mt-2">Café espresso com leite vaporizado e uma generosa camada de espuma de leite.</p>
                         <div class="mt-4 flex justify-between items-center">
-                            <span class="text-lg font-bold text-primary">R$ 10,90</span>
+                            <span class="text-lg font-bold text-primary">R$ 12,90</span>
                             <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Cappuccino" data-price="10.90">
                                 Pedir
                             </button>
@@ -261,7 +331,7 @@
                 </div>
                 
                 <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
-                    <img src="https://images.unsplash.com/photo-1481070555726-e2fe83577250?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" alt="Torta de Frango" class="w-full h-48 object-cover">
+                    <img src="Imagens/Torta de Frango.webp" alt="Torta de Frango" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900">Torta de Frango</h3>
                         <p class="text-gray-600 mt-2">Massa folhada crocante recheada com frango desfiado, catupiry e ervas finas.</p>
@@ -273,6 +343,63 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
+    <img src="Imagens/como_fazer_hamburguer_caseiro_1-3.jpg" alt="Hambúrguer Artesanal" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Hambúrguer Artesanal</h3>
+        <p class="text-gray-600 mt-2">Pão brioche, hambúrguer 100% carne bovina, queijo cheddar, bacon crocante e molho especial.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 22,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Hambúrguer Artesanal" data-price="22.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=735&q=80" alt="Sanduíche de Pernil" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Sanduíche de Pernil</h3>
+        <p class="text-gray-600 mt-2">Pão francês recheado com pernil assado, queijo derretido e molho de cebola caramelizada.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 18,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Sanduíche de Pernil" data-price="18.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
+    <img src="Imagens/Beirute-de-frango-1200x1501.jpg" alt="Beirute de Frango" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Beirute de Frango</h3>
+        <p class="text-gray-600 mt-2">Pão sírio recheado com frango grelhado, queijo mussarela, tomate, alface e maionese especial.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 16,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Beirute de Frango" data-price="16.50">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="food">
+    <img src="Imagens/baguete-de-frango.jpeg" alt="Baguete Vegetariana" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Baguete Vegetariana</h3>
+        <p class="text-gray-600 mt-2">Baguete artesanal com queijo branco, rúcula, tomate seco e um toque de azeite extravirgem.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 14,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Baguete Vegetariana" data-price="14.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
                 
                 <!-- Dessert Items -->
                 <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
@@ -288,6 +415,63 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
+    <img src="Imagens/brownie-com-sorvete.jpg" alt="Brownie com Sorvete" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Brownie com Sorvete</h3>
+        <p class="text-gray-600 mt-2">Brownie de chocolate quente acompanhado de sorvete de creme e calda de chocolate.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 13,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Brownie com Sorvete" data-price="13.50">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
+    <img src="Imagens/Q3SE72ZUZRGKHOJHHW33TBLP4A.jpg" alt="Tiramisu" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Tiramisu</h3>
+        <p class="text-gray-600 mt-2">Camadas de biscoito embebido em café, creme mascarpone e cacau polvilhado.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 17,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Tiramisu" data-price="17.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
+    <img src="Imagens/petit-gateau-scaled.jpg" alt="Petit Gâteau" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Petit Gâteau</h3>
+        <p class="text-gray-600 mt-2">Bolinho quente de chocolate com recheio cremoso, acompanhado de sorvete de creme.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 16,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Petit Gâteau" data-price="16.50">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
+    <img src="Imagens/pave-brigadeiro-chocolate-amargo.jpg"Pavê de Chocolate" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Pavê de Chocolate</h3>
+        <p class="text-gray-600 mt-2">Camadas de creme de chocolate, biscoito e chantilly, servido bem gelado.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 14,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Pavê de Chocolate" data-price="14.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
                 
                 <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="dessert">
                     <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80" alt="Brownie" class="w-full h-48 object-cover">
@@ -305,7 +489,7 @@
                 
                 <!-- Drink Items -->
                 <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
-                    <img src="https://images.unsplash.com/photo-1551029506-0807df4fa203?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Suco Natural" class="w-full h-48 object-cover">
+                    <img src="Imagens/suco-de-fruta-natural-scaled.jpg" alt="Suco Natural" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900">Suco Natural</h3>
                         <p class="text-gray-600 mt-2">Opções: Laranja, Abacaxi com Hortelã, Maracujá ou Morango.</p>
@@ -317,22 +501,61 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
-                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Chocolate Quente" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900">Chocolate Quente</h3>
-                        <p class="text-gray-600 mt-2">Cremoso e feito com chocolate belga, servido com chantilly e canela.</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <span class="text-lg font-bold text-primary">R$ 11,50</span>
-                            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Chocolate Quente" data-price="11.50">
-                                Pedir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <img src="Imagens/Smoothie-de-Morango.jpg" alt="Smoothie de Morango" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Smoothie de Morango</h3>
+        <p class="text-gray-600 mt-2">Batida cremosa de morango com iogurte natural e mel.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 12,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Smoothie de Morango" data-price="12.50">
+                Pedir
+            </button>
         </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
+    <img src="Imagens/Chá gelado.jpeg" alt="Chá Gelado de Limão" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Chá Gelado de Limão</h3>
+        <p class="text-gray-600 mt-2">Chá preto refrescante com suco de limão e gelo.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 9,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Chá Gelado de Limão" data-price="9.50">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
+    <img src="Imagens/milk-shake-de-chocolate.jpg" alt="Milkshake de Chocolate" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Milkshake de Chocolate</h3>
+        <p class="text-gray-600 mt-2">Sorvete de chocolate batido com leite e calda de chocolate.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 14,90</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Milkshake de Chocolate" data-price="14.90">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300" data-category="drink">
+    <img src="Imagens/chocolate-quente-cremoso.avif" alt="Chocolate Quente" class="w-full h-48 object-cover">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-gray-900">Chocolate Quente</h3>
+        <p class="text-gray-600 mt-2">Cremoso e feito com chocolate belga, servido com chantilly e canela.</p>
+        <div class="mt-4 flex justify-between items-center">
+            <span class="text-lg font-bold text-primary">R$ 11,50</span>
+            <button class="order-btn bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full transition duration-300" data-item="Chocolate Quente" data-price="11.50">
+                Pedir
+            </button>
+        </div>
+    </div>
+</div>
     </section>
 
     <!-- About Us -->
@@ -548,15 +771,15 @@
             </div>
             
             <div class="border-t border-white border-opacity-20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-white text-opacity-80 text-sm">© 2023 Panzarini. Todos os direitos reservados.</p>
+                <p class="text-white text-opacity-80 text-sm">© 2025  Cafeteria Panzarini. Todos os direitos reservados.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="#" class="text-white text-opacity-80 hover:text-opacity-100 transition">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="text-white text-opacity-80 hover:text-opacity-100 transition">
+                    <a href="https://www.instagram.com/cafeteriapanzarini/" target="_blank" class="social-icon hover:text-white transition">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-white text-opacity-80 hover:text-opacity-100 transition">
+                    <a href="https://www.linkedin.com/in/ryan-panzarini-137521265/" target="_blank" class="social-icon hover:text-white transition">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
